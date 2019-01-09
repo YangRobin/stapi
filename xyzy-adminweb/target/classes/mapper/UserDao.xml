@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.robin.dao.UserDao">
+
+	<select id="queryUserByNameAndPassWord"
+		resultType="com.robin.bean.UserBean">
+		SELECT * FROM user WHERE
+		<if test="name != null">
+			name=#{name}
+		</if>
+		<if test="password != null">
+			AND password = #{password}
+		</if>
+	</select>
+
+	<insert id="registerUser"
+		parameterType="com.robin.bean.UserBean" useGeneratedKeys="true"
+		keyProperty="id" keyColumn="id">
+
+		INSERT INTO user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userBean.id != null">
+				id,
+			</if>
+			<if test="userBean.name !=null">
+				name,
+			</if>
+			<if test="userBean.age !=null">
+				age,
+			</if>
+			<if test="userBean.phone != null">
+				phone,
+			</if>
+			<if test="userBean.address != null">
+				address,
+			</if>
+			<if test="userBean.schoolId !=null">
+				school_id,
+			</if>
+			<if test="userBean.avator != null">
+				avator,
+			</if>
+			<if test="userBean.password != null">
+				password,
+			</if>
+			<if test="userBean.userRole != null">
+				user_role,
+			</if>
+			<if test="userBean.level != null">
+				level,
+			</if>
+			<if test="userBean.major != null">
+				major
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="userBean.id != null">
+				#{id},
+			</if>
+			<if test="userBean.name !=null">
+				#{name},
+			</if>
+			<if test="userBean.age !=null">
+				#{age},
+			</if>
+			<if test="userBean.phone != null">
+				#{phone},
+			</if>
+			<if test="userBean.address != null">
+				#{address},
+			</if>
+			<if test="userBean.schoolId !=null">
+				#{school_id},
+			</if>
+			<if test="userBean.avator != null">
+				#{avator},
+			</if>
+			<if test="userBean.password != null">
+				#{password},
+			</if>
+			<if test="userBean.userRole != null">
+				#{user_role},
+			</if>
+			<if test="userBean.level != null">
+				#{level},
+			</if>
+			<if test="userBean.major != null">
+				#{major}
+			</if>
+		</trim>
+	</insert>
+</mapper>
